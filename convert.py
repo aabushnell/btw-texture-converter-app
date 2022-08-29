@@ -1,14 +1,7 @@
 import os
 import shutil
-import pandas as pd
 from zipfile import ZipFile, is_zipfile
-
-# source file for texture mappings
-TEXTURE_MAP = pd.read_csv('map.csv', index_col=0)
-
-# folders for pack i/o
-INPUT_FOLDER = 'packs/input/'
-OUTPUT_FOLDER = 'packs/output/'
+from config import *
 
 def get_files(folder=INPUT_FOLDER):
     return [file for file in os.listdir(folder) \
@@ -43,7 +36,7 @@ def get_pack_folder():
             return os.path.split(path)[1]
     return None
 
-def remove_pack_folders(packname):
+def remove_pack_folders(packname, plus_zip=False):
     in_files = get_files()
     if len(in_files) > 1:
         print('cleaning up input folder...')
@@ -53,6 +46,12 @@ def remove_pack_folders(packname):
     if len(out_files) > 1:
         print('cleaning up output folder...')
         shutil.rmtree(OUTPUT_FOLDER + packname)
+
+    if plus_zip:
+        print('clearing input folder...', '\n',
+              'clearing output folder...')
+        os.remove(INPUT_FOLDER + packname + '.zip')
+        os.remove(OUTPUT_FOLDER + packname + '.zip')
 
 def zip_pack_folder(packname):
     dir_name = OUTPUT_FOLDER + packname
@@ -78,6 +77,15 @@ def write_pack_metadata(packname):
     print('writing pack.txt...')
     with open(OUTPUT_FOLDER + packname + '/pack.txt', 'w') as pack:
         pack.write('Auto-Generated Textures for BTW!')
+
+def clear_input_folder():
+    files = get_files(folder=INPUT_FOLDER)
+    for file in files:
+        path = INPUT_FOLDER + file
+        if os.path.isdir(path):
+            shutil.rmtree(path)
+        else:
+            os.remove(path)
 
 def clear_output_folder():
     files = get_files(folder=OUTPUT_FOLDER)

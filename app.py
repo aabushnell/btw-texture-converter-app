@@ -1,7 +1,7 @@
 import os
 from flask import Flask, render_template, request, redirect, url_for, abort, send_from_directory
 from werkzeug.utils import secure_filename
-from convert import convert
+from convert import *
 
 app = Flask(__name__)
 app.config['MAX_CONTENT_LENGTH'] = 20 * 1024 * 1024
@@ -17,6 +17,8 @@ def index():  # render main page html
 
 @app.route('/', methods=['POST'])
 def upload_file():
+    clear_input_folder()
+    clear_output_folder()
     uploaded_file = request.files['file']
     global filename
     filename = secure_filename(uploaded_file.filename)
@@ -26,7 +28,7 @@ def upload_file():
             abort(400)
         uploaded_file.save(os.path.join(app.config['UPLOAD_PATH'], filename))
         convert()
-    return redirect(url_for('index'))
+    return redirect(url_for('download_file'))
 
 @app.route('/download')
 def download_file():
