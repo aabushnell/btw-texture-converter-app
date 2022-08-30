@@ -35,5 +35,4 @@ def download_file():
     return send_from_directory(app.config['DOWNLOAD_PATH'],
                                filename)
 
-if __name__ == '__main__':
-    app.run()
+app.run()

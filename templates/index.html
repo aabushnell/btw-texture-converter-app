@@ -7,14 +7,22 @@
 </head>
 <body>
     <div class="main">
-        <img src="wolf.png">
+        <img src="https://github.com/aabushnell/btw-texture-converter-app/blob/main/wolf.png?raw=true">
         <div class="border"></div>
         <div class="center">
             <div class="main-box">
                 <h1>File Upload</h1>
                 <form class="submit-box" method="POST" action="" enctype="multipart/form-data">
-                  <p><input type="file" name="file" accept=".zip"></p>
-                  <p><input type="submit" value="Submit"></p>
+                    <table class="submit-table">
+                        <tr><td>Input</td><td><input type="file" name="file" accept=".zip"></td></tr>
+                    </table>
+                    <table>
+                        <tr>
+                            <td class="submit-button">
+                                <input type="submit" value="Patch">
+                            </td>
+                        </tr>
+                    </table>
                 </form>
             </div>
         </div>

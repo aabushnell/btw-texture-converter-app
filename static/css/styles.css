@@ -6,6 +6,17 @@ body {
     color: #EEE;
 }
 
+td {
+    padding: 10px;
+}
+
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 25%;
+}
+
 .border {
     flex: 1;
 }
@@ -32,6 +43,14 @@ body {
 .submit-box {
     background-color: rgb(47, 49, 54);
     padding: 10px;
+}
+
+.submit-table {
+
+}
+
+.submit-button {
+    text-align: right;
 }
 
 input[type='file'] {
